@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=aievaluator
+      - POSTGRES_USER=aievaluator
+      - POSTGRES_PASSWORD=aipassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    restart: always
+
+  backend:
+    build: ./backend
+    environment:
+      - DATABASE_URL=postgres://aievaluator:aipassword@db:5432/aievaluator
+      - NODE_ENV=production
+      - GEMINI_API_KEY=AIzaSyCAd_BrMFyqPGYjuyYN9y-zNW9o8zZMSKI
+      - JWT_SECRET=jwt_secret
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
+
+  frontend:
+    build: ./frontend
+    environment:
+      - VITE_API_BASE=http://localhost:8080
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  pgdata:
