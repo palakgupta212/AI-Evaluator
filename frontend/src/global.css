@@ -1,0 +1,328 @@
+/* Design System Variables */
+:root {
+  --surface-light: #f8f6f3;
+  --surface-dark: #050505;
+  --text-primary: #000000;
+  --text-inverted: #FFFFFF;
+  --text-subtle: #888888;
+  --border-color: #E5E5E5;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: var(--surface-light);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Classes */
+.headline-serif {
+  font-family: 'EdictDisplayWeb', 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+.body-text {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.meta-mono {
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Utility Classes */
+.border-radius-none {
+  border-radius: 0px !important;
+}
+
+.sharp-edges {
+  border-radius: 0px !important;
+}
+
+/* Fog Gradient Effect */
+.fog-gradient {
+  position: relative;
+}
+
+.fog-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, var(--surface-light));
+  pointer-events: none;
+}
+
+/* Override Material-UI Components */
+.MuiButton-root {
+  border-radius: 0px !important;
+  text-transform: none !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure button text color properly overrides MUI defaults only when needed */
+
+.MuiCard-root {
+  border-radius: 0px !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root {
+  border-radius: 0px !important;
+}
+
+.MuiChip-root {
+  border-radius: 0px !important;
+}
+
+.MuiPaper-root {
+  border-radius: 0px !important;
+}
+
+.MuiDialog-paper {
+  border-radius: 0px !important;
+}
+
+.MuiTab-root {
+  text-transform: none !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+}
+
+/* Custom Button Styles - Simple Color Swap */
+.btn-primary {
+  background-color: var(--text-primary) !important;
+  color: var(--text-inverted) !important;
+  border: none !important;
+  padding: 12px 32px !important;
+  font-weight: 500 !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--text-inverted) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Make all children inherit the button's color */
+.btn-primary > *:not(.MuiTouchRipple-root):not(.MuiTouchRipple-root *),
+.btn-primary > span:not(.MuiTouchRipple-root),
+.btn-primary > .MuiButton-label,
+.btn-primary .MuiButton-label,
+.btn-primary .MuiButton-label > * {
+  transition: color 0.3s ease !important;
+  color: inherit !important;
+}
+
+/* When button is white (inside dark container), reverse the effect */
+.btn-primary[style*="background-color: var(--text-inverted)"],
+.btn-primary[style*="background-color: #ffffff"],
+.btn-primary[style*="background-color: rgb(255, 255, 255)"] {
+  background-color: var(--text-inverted) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-primary[style*="background-color: var(--text-inverted)"]:hover,
+.btn-primary[style*="background-color: #ffffff"]:hover,
+.btn-primary[style*="background-color: rgb(255, 255, 255)"]:hover {
+  background-color: var(--text-primary) !important;
+  color: var(--text-inverted) !important;
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--text-primary) !important;
+  padding: 12px 32px !important;
+  font-weight: 500 !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-primary) !important;
+  color: var(--text-inverted) !important;
+  border-color: var(--text-primary) !important;
+}
+
+/* Make all children inherit the button's color */
+.btn-secondary > *:not(.MuiTouchRipple-root):not(.MuiTouchRipple-root *),
+.btn-secondary > span:not(.MuiTouchRipple-root),
+.btn-secondary > .MuiButton-label,
+.btn-secondary .MuiButton-label,
+.btn-secondary .MuiButton-label > * {
+  transition: color 0.3s ease !important;
+  color: inherit !important;
+}
+
+/* Button styles when inside hovered dark containers - using class-based approach */
+.card-hover-dark:hover .btn-primary,
+.card-hover-dark:hover .btn-secondary {
+  background-color: var(--text-inverted) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--text-inverted) !important;
+}
+
+/* Also handle buttons inside any container that becomes dark on hover */
+[class*="hover"]:hover .btn-primary,
+[class*="hover"]:hover .btn-secondary {
+  /* Only apply if parent has dark background */
+}
+
+/* Specific fix for Material-UI Box/Card with dark hover */
+.MuiBox-root:hover .btn-primary,
+.MuiCard-root:hover .btn-primary,
+.MuiBox-root:hover .btn-secondary,
+.MuiCard-root:hover .btn-secondary {
+  /* Check if parent has dark background via inline styles or computed style */
+}
+
+/* Navigation Menu Styles */
+.fullscreen-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--surface-light);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.menu-item-large {
+  font-family: 'EdictDisplayWeb', 'Playfair Display', serif;
+  font-size: 6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--text-primary);
+  text-decoration: none;
+  margin: 1rem 0;
+  transition: opacity 0.2s ease;
+}
+
+.menu-item-large:hover {
+  opacity: 0.6;
+}
+
+.menu-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--text-subtle);
+  margin-right: 1rem;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  text-align: center;
+  padding: 8rem 2rem;
+  position: relative;
+}
+
+.hero-subtitle {
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.hero-headline {
+  font-family: 'EdictDisplayWeb', 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--text-primary);
+  margin-bottom: 3rem;
+}
+
+/* Card Styles */
+.card-minimal {
+  background-color: var(--surface-light);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  border-radius: 0px;
+}
+
+/* Table Styles */
+.table-minimal {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-minimal th,
+.table-minimal td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-minimal th {
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+  font-weight: 500;
+}
+
+/* Input Styles */
+.input-minimal {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-light);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  border-radius: 0px;
+  transition: border-color 0.2s ease;
+}
+
+.input-minimal:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-subtle);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
