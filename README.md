@@ -100,3 +100,5 @@ This project provided hands-on experience in:
 
 Computer Science & Data Science Student
 
+<img width="1902" height="869" alt="image" src="https://github.com/user-attachments/assets/aa1c7264-5cbb-4a7c-aa28-f90c0b911dc9" />
+
