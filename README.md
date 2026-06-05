@@ -100,6 +100,3 @@ This project provided hands-on experience in:
 
 Computer Science & Data Science Student
 
-LinkedIn: [Your LinkedIn Profile]
-
-GitHub: [Your GitHub Profile]
